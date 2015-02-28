@@ -1,0 +1,15 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <Preference
+            android:title="Select config file"
+            android:key="filePicker"
+            />
+    <CheckBoxPreference
+            android:key="start_on_start"
+            android:title="@string/setting_start_on_start_title"
+            android:defaultValue="true" />
+    <CheckBoxPreference
+            android:key="start_on_boot"
+            android:title="@string/setting_start_on_boot_title"
+            android:defaultValue="true" />
+
+</PreferenceScreen>
