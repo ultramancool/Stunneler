@@ -1,5 +1,7 @@
 package ca.trulz.stunneler.app;
 
+import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -31,15 +33,23 @@ public class SettingsActivity extends ActionBarActivity
         {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.pref_general);
-            Preference filePicker = (Preference) findPreference(CONFIG_FILE);
+            Preference filePicker = findPreference(CONFIG_FILE);
 
             SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
             filePicker.setSummary(sharedPref.getString(CONFIG_FILE,""));
             filePicker.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
-                    Intent intent = new Intent("org.openintents.action.PICK_FILE");
-                    startActivityForResult(intent, OPEN_CONFIG);
+                    try {
+                        Intent intent = new Intent("org.openintents.action.PICK_FILE");
+                        startActivityForResult(intent, OPEN_CONFIG);
+                    } catch (ActivityNotFoundException e) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                        builder.setMessage("Failed to start OI File Manager to choose configuration file. You must " +
+                                "install it from your preferred package manager.");
+                        builder.setTitle("Error");
+                        builder.create().show();
+                    }
                     return true;
                 }
             });
@@ -47,11 +57,13 @@ public class SettingsActivity extends ActionBarActivity
 
         @Override
         public void onActivityResult(int requestCode, int resultCode, Intent data) {
-            Preference filePicker = (Preference) findPreference(CONFIG_FILE);
-            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-            String filePath = data.getData().getPath();
-            sharedPref.edit().putString(CONFIG_FILE, filePath).apply();
-            filePicker.setSummary(filePath);
+            if (data != null && data.getData() != null) {
+                Preference filePicker = findPreference(CONFIG_FILE);
+                SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                String filePath = data.getData().getPath();
+                sharedPref.edit().putString(CONFIG_FILE, filePath).apply();
+                filePicker.setSummary(filePath);
+            }
         }
     }
 }
