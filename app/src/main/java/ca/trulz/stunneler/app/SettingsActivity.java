@@ -12,7 +12,6 @@ import android.support.v7.app.ActionBarActivity;
 
 public class SettingsActivity extends ActionBarActivity
 {
-
     public static final String CONFIG_FILE = "filePicker";
 
     @Override

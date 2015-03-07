@@ -26,10 +26,10 @@ public class StunnelerService extends Service {
     private ServiceHandler mServiceHandler;
     private IBinder mBinder = new StunnelerBinder();
     private java.lang.Process process;
-    private String output;
+    private StringLineBuffer buffer;
 
     public StunnelerService() {
-        output = "";
+        buffer = new StringLineBuffer(100);
     }
 
     public static void start(Context context) {
@@ -39,7 +39,7 @@ public class StunnelerService extends Service {
     }
 
     public String getOutput() {
-        return output;
+        return buffer.buildString();
     }
 
     private void sendLogMessage(String s) {
@@ -127,7 +127,7 @@ public class StunnelerService extends Service {
                     BufferedReader bufferedReader = new BufferedReader(reader);
                     String s;
                     while ((s = bufferedReader.readLine()) != null) {
-                        output += s + "\n";
+                        buffer.appendLine(s);
                         sendLogMessage(s);
                     }
                     bufferedReader.close();
