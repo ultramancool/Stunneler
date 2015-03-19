@@ -2,10 +2,11 @@ language: android
 
 android:
 	components:
-		- build-tools-20.0.0
+		- build-tools-24.0.0
 		- android-L
 		- add-on
 		- extra
+		- sys-img-armeabi-v7a-android-22
 	licenses:
 		- 'android-sdk-preview-license-52d11cd2'
 		- 'android-sdk-license-.+'
