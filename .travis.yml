@@ -1,18 +1,23 @@
 language: android
 jdk: oraclejdk7
-# hack to maybe make this actually work
 cache: false
 sudo: false
 android:
   components:
-    - build-tools-24.0.0
-    - android-L
-    - add-on
-    - extra
-    - sys-img-armeabi-v7a-android-22
+  - build-tools-24.0.0
+  - android-L
+  - add-on
+  - extra
+  - sys-img-armeabi-v7a-android-22
   licenses:
-    - 'android-sdk-preview-license-52d11cd2'
-    - 'android-sdk-license-.+'
-    - 'google-gdk-license-.+'
-
-script: ./gradlew build check
+  - android-sdk-preview-license-52d11cd2
+  - android-sdk-license-.+
+  - google-gdk-license-.+
+script: "./gradlew build check"
+deploy:
+  provider: releases
+  api_key:
+    secure: juleuWiUY/cPP4EWkI1dYj2ktodzjVq5sfPVgfjH2p3ZMOTRSqxkLeEktgExtRUnZf3u8N+sPEX934sNfKRX8xhXay9Gfsz/oLCKgBl+sHPapori+CjTrUTV7sb2vkohGMwJN6DhWe5Q8ex1QEQItdVNwsA43BJIUVde70Y8uk8=
+  file: app/build/outputs/apk/app-release-unsigned.apk
+  on:
+    repo: ultramancool/Stunneler
