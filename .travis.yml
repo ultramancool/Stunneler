@@ -1,0 +1,13 @@
+language: android
+
+android:
+	components:
+		- build-tools-20.0.0
+		- android-L
+		- add-on
+		- extra
+	licenses:
+		- 'android-sdk-preview-license-52d11cd2'
+		- 'android-sdk-license-.+'
+		- 'google-gdk-license-.+'
+
