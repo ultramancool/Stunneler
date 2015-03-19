@@ -21,3 +21,4 @@ deploy:
   file: app/build/outputs/apk/app-release-unsigned.apk
   on:
     repo: ultramancool/Stunneler
+    tags: true
