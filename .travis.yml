@@ -18,7 +18,7 @@ deploy:
   provider: releases
   api_key:
     secure: juleuWiUY/cPP4EWkI1dYj2ktodzjVq5sfPVgfjH2p3ZMOTRSqxkLeEktgExtRUnZf3u8N+sPEX934sNfKRX8xhXay9Gfsz/oLCKgBl+sHPapori+CjTrUTV7sb2vkohGMwJN6DhWe5Q8ex1QEQItdVNwsA43BJIUVde70Y8uk8=
-  file: app/build/outputs/apk/app-release-unsigned.apk
+  file: app/build/outputs/apk/app-debug.apk
   on:
     repo: ultramancool/Stunneler
     tags: true
